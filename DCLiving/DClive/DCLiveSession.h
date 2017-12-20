@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface DCLiveSession : NSObject
+
++ (instancetype)defultSession;
+
+- (void)startCapture:(UIView *)preview;
+
+- (void)stopCapture;
 
 @end

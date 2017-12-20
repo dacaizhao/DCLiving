@@ -7,12 +7,13 @@
 //
 
 #import "ViewController.h"
-#import "VideoCapture.h"
+#import "DCLiveSession.h"
 
 
 @interface ViewController ()
 
-@property (nonatomic,strong) VideoCapture *videoCapture;
+@property (nonatomic,strong) DCLiveSession *liveSession;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 @end
 
@@ -24,18 +25,18 @@
 }
 
 - (IBAction)start:(UIButton *)sender {
-    [self.videoCapture startCapture:self.view];
+    [self.liveSession startCapture:self.view];
 }
 
 - (IBAction)end:(UIButton *)sender {
-    [self.videoCapture stopCapture];
+    [self.liveSession stopCapture];
 }
 
 
-- (VideoCapture *)videoCapture {
-    if (!_videoCapture) {
-        _videoCapture = [[VideoCapture alloc]init];
+- (DCLiveSession *)liveSession {
+    if (!_liveSession) {
+        _liveSession = [DCLiveSession defultSession];
     }
-    return _videoCapture;
+    return _liveSession;
 }
 @end
