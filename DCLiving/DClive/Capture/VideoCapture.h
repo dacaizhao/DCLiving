@@ -7,9 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+
+@class VideoCapture;
+@protocol VideoCaptureDeleagte <NSObject>
+- (void)capture:(VideoCapture *)capture videoBuffer:(CMSampleBufferRef)videoBuffer;
+- (void)capture:(VideoCapture *)capture audioBuffer:(CMSampleBufferRef)videoBuffer;
+@end
 
 
 @interface VideoCapture : NSObject
+
+@property (nonatomic,weak) id<VideoCaptureDeleagte> delegate;
 
 - (void)startCapture:(UIView *)preview;
 

@@ -15,6 +15,9 @@
 		590D8C361FE9FC5E007499FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 590D8C351FE9FC5E007499FD /* main.m */; };
 		590D8C421FE9FE09007499FD /* VideoCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 590D8C411FE9FE09007499FD /* VideoCapture.m */; };
 		590D8C451FEA012C007499FD /* DCLiveSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 590D8C441FEA012C007499FD /* DCLiveSession.m */; };
+		5976CC1A1FEA0D5E006C2AF6 /* AACEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5976CC191FEA0D5E006C2AF6 /* AACEncoder.m */; };
+		5976CC1D1FEA0D7A006C2AF6 /* H264Encoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5976CC1C1FEA0D7A006C2AF6 /* H264Encoder.m */; };
+		5976CC201FEA1058006C2AF6 /* VideoConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5976CC1F1FEA1058006C2AF6 /* VideoConfig.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,12 @@
 		590D8C411FE9FE09007499FD /* VideoCapture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCapture.m; sourceTree = "<group>"; };
 		590D8C431FEA012C007499FD /* DCLiveSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCLiveSession.h; sourceTree = "<group>"; };
 		590D8C441FEA012C007499FD /* DCLiveSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCLiveSession.m; sourceTree = "<group>"; };
+		5976CC181FEA0D5E006C2AF6 /* AACEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AACEncoder.h; sourceTree = "<group>"; };
+		5976CC191FEA0D5E006C2AF6 /* AACEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AACEncoder.m; sourceTree = "<group>"; };
+		5976CC1B1FEA0D7A006C2AF6 /* H264Encoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H264Encoder.h; sourceTree = "<group>"; };
+		5976CC1C1FEA0D7A006C2AF6 /* H264Encoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = H264Encoder.m; sourceTree = "<group>"; };
+		5976CC1E1FEA1058006C2AF6 /* VideoConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoConfig.h; sourceTree = "<group>"; };
+		5976CC1F1FEA1058006C2AF6 /* VideoConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +106,10 @@
 		590D8C3E1FE9FCD6007499FD /* Encoder */ = {
 			isa = PBXGroup;
 			children = (
+				5976CC181FEA0D5E006C2AF6 /* AACEncoder.h */,
+				5976CC191FEA0D5E006C2AF6 /* AACEncoder.m */,
+				5976CC1B1FEA0D7A006C2AF6 /* H264Encoder.h */,
+				5976CC1C1FEA0D7A006C2AF6 /* H264Encoder.m */,
 			);
 			path = Encoder;
 			sourceTree = "<group>";
@@ -117,6 +130,8 @@
 		590D8C461FEA0154007499FD /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				5976CC1E1FEA1058006C2AF6 /* VideoConfig.h */,
+				5976CC1F1FEA1058006C2AF6 /* VideoConfig.m */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -192,10 +207,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5976CC1D1FEA0D7A006C2AF6 /* H264Encoder.m in Sources */,
 				590D8C451FEA012C007499FD /* DCLiveSession.m in Sources */,
 				590D8C421FE9FE09007499FD /* VideoCapture.m in Sources */,
 				590D8C2B1FE9FC5E007499FD /* ViewController.m in Sources */,
 				590D8C361FE9FC5E007499FD /* main.m in Sources */,
+				5976CC201FEA1058006C2AF6 /* VideoConfig.m in Sources */,
+				5976CC1A1FEA0D5E006C2AF6 /* AACEncoder.m in Sources */,
 				590D8C281FE9FC5E007499FD /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

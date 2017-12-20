@@ -6,9 +6,12 @@
 //  Copyright © 2017年 point. All rights reserved.
 //
 
-#import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 #import "VideoCapture.h"
+#import "H264Encoder.h"
+
+
+#define NOW (CACurrentMediaTime()*1000)
 
 @interface VideoCapture () <AVCaptureVideoDataOutputSampleBufferDelegate,AVCaptureAudioDataOutputSampleBufferDelegate>
 
@@ -24,6 +27,7 @@
 /** 捕捉画面执行的线程队列 */
 @property (nonatomic, strong) dispatch_queue_t captureVideoQueue; //视频
 @property (nonatomic, strong) dispatch_queue_t captureAudioQueue; //音频
+
 
 @end
 
@@ -85,10 +89,13 @@
 #pragma mark - 获取到数据
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
     if (captureOutput == self.captureVideoOutput) {
-        NSLog(@"视频%@",[NSThread currentThread]);
-        
+        if ([self.delegate respondsToSelector:@selector(capture:videoBuffer:)]) {
+            [self.delegate capture:self videoBuffer:sampleBuffer];
+        }
     }else {
-        NSLog(@"声音%@",[NSThread currentThread]);
+        if ([self.delegate respondsToSelector:@selector(capture:audioBuffer:)]) {
+            [self.delegate capture:self audioBuffer:sampleBuffer];
+        }
     }
 }
 

@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "VideoConfig.h"
+
 
 @interface DCLiveSession : NSObject
+
+@property (nonatomic,strong) VideoConfig *videoConfig; //视屏配置
 
 + (instancetype)defultSession;
 

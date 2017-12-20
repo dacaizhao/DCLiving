@@ -21,6 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    VideoConfig *videoConfig = [VideoConfig defaultConfig];
+    self.liveSession.videoConfig = videoConfig;
     
 }
 
