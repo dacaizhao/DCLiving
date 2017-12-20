@@ -195,4 +195,10 @@ void didCompressH264(void *outputCallbackRefCon, void *sourceFrameRefCon, OSStat
     }
 }
 
+- (void)endEncode {
+    VTCompressionSessionCompleteFrames(self.compressionSession, kCMTimeInvalid);
+    VTCompressionSessionInvalidate(self.compressionSession);
+    CFRelease(self.compressionSession);
+    self.compressionSession = NULL;
+}
 @end

@@ -30,4 +30,6 @@
 
 - (void)encodeVideoData:(CMSampleBufferRef)pixelBuffer timeStamp:(uint64_t)timeStamp;
 
+- (void)endEncode;
+
 @end

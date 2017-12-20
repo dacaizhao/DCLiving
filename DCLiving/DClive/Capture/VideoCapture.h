@@ -12,7 +12,7 @@
 @class VideoCapture;
 @protocol VideoCaptureDeleagte <NSObject>
 - (void)capture:(VideoCapture *)capture videoBuffer:(CMSampleBufferRef)videoBuffer;
-- (void)capture:(VideoCapture *)capture audioBuffer:(CMSampleBufferRef)videoBuffer;
+- (void)capture:(VideoCapture *)capture audioBuffer:(CMSampleBufferRef)audioBuffer;
 @end
 
 
