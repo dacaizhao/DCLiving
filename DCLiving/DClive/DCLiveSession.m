@@ -10,6 +10,7 @@
 #import "VideoCapture.h"
 #import "H264Encoder.h"
 #import "AACEncoder.h"
+#import "RtmpManager.h"
 
 @interface DCLiveSession ()<H264EncoderDeleagte,VideoCaptureDeleagte,AACEncoderDeleagte>
 
@@ -34,36 +35,45 @@
     self.h264Encoder.delegate = self;
     self.aacEncoder.delegate = self;
     
+   // dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[RtmpManager getInstance]startRtmpConnect];
+   // });
 }
 
 - (void)stopCapture {
     [self.videoCapture stopCapture];
     [self.h264Encoder endEncode];
     [self.aacEncoder endEncode];
+    [[RtmpManager getInstance]stopRtmpConnect];
 }
 
 #pragma mark - 捕获到的音频
 - (void)capture:(VideoCapture *)capture audioBuffer:(CMSampleBufferRef)audioBuffer {
-    [self.aacEncoder encodeAudioData:audioBuffer timeStamp:0];
+   // [self.aacEncoder encodeAudioData:audioBuffer timeStamp:0];
 }
 
 #pragma mark - 捕获到的视频
 - (void)capture:(VideoCapture *)capture videoBuffer:(CMSampleBufferRef)videoBuffer {
-    //[self.h264Encoder encodeVideoData:videoBuffer timeStamp:0];
+    [self.h264Encoder encodeVideoData:videoBuffer timeStamp:0];
 }
 
 #pragma mark - 视频的编码
 - (void)h264Encoder:(H264Encoder *)encoder didEncodeFrame:(NSData *)data timestamp:(uint64_t)timestamp isKeyFrame:(BOOL)isKeyFrame {
-    NSLog(@"111");
+    
+    //[[RtmpManager getInstance] send_rtmp_video:(unsigned char *)[data bytes] andLength:(uint32_t)[data length]];
+    NSLog(@"ddd%s",(unsigned char *)[data bytes]);
 }
 //pps图像参数集 I帧的详情  sps序列参数集
 - (void)h264Encoder:(H264Encoder *)encoder didGetSps:(NSData *)spsData pps:(NSData *)ppsData timestamp:(uint64_t)timestamp {
-    NSLog(@"222");
+  
+    
+    //
+     NSLog(@"vvv%s",(unsigned char *)[spsData bytes]);
 }
 
 #pragma mark - 音频的编码
 - (void)aacEncoder:(AACEncoder *)encoder didEncodeBuffer:(NSData *)data timestamp:(uint64_t)timestamp {
-    [self.fileHandle writeData:data];
+    //[self.fileHandle writeData:data];
 }
 
 

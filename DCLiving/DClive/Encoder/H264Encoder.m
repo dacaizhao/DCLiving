@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "H264Encoder.h"
+#import "RtmpManager.h"
 
 @interface H264Encoder ()
 
@@ -16,7 +17,7 @@
 
 /** 编码会话 */
 @property (nonatomic, assign) VTCompressionSessionRef compressionSession;
-
+@property (nonatomic, strong) NSFileHandle *fileHandle;
 @end
 
 @implementation H264Encoder
@@ -24,6 +25,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         [self setupVideoSession];
+        [self setupFileHandle];
     }
     return self;
 }
@@ -121,11 +123,12 @@ void didCompressH264(void *outputCallbackRefCon, void *sourceFrameRefCon, OSStat
         CMVideoFormatDescriptionGetH264ParameterSetAtIndex(format, 1, &pparameterSet, &pparameterSetSize, &pparameterSetCount, 0 );
         
         // 装sps/pps转成NSData，以方便写入文件
-        NSData *sps = [NSData dataWithBytes:sparameterSet length:sparameterSetSize];
-        NSData *pps = [NSData dataWithBytes:pparameterSet length:pparameterSetSize];
+        //NSData *sps = [NSData dataWithBytes:sparameterSet length:sparameterSetSize];
+        //NSData *pps = [NSData dataWithBytes:pparameterSet length:pparameterSetSize];
         
         // 写入文件
-        [encoder gotSpsPps:sps pps:pps];
+        //[encoder gotSpsPps:sps pps:pps];
+        [[RtmpManager getInstance] send_video_sps_pps:(unsigned char *)sparameterSet andSpsLength:(int)sparameterSetSize andPPs:(unsigned char *)pparameterSet andPPsLength:(int)pparameterSetSize];
     }
     
     // 获取数据块
@@ -146,8 +149,43 @@ void didCompressH264(void *outputCallbackRefCon, void *sourceFrameRefCon, OSStat
             // 从大端转系统端
             NALUnitLength = CFSwapInt32BigToHost(NALUnitLength);
             
-            NSData* data = [[NSData alloc] initWithBytes:(dataPointer + bufferOffset + AVCCHeaderLength) length:NALUnitLength];
-            [encoder gotEncodedData:data isKeyFrame:isKeyframe];
+            
+            // unsigned char* nali =
+           const void * ddd = dataPointer + bufferOffset + AVCCHeaderLength;
+            char *d = (char *)ddd;
+           
+            //char p[] = "\x00\x00\x01";
+            //strcat(p,d);
+          
+            
+            
+            
+            
+//            char str[512];
+//            memset(str, 0, 512);
+//            memcpy(str, p, strlen(p));
+//            memcpy(str + strlen(d), d, strlen(d));
+            
+            
+            const char bytes[] = "\x00\x00\x01";
+            size_t length = (sizeof bytes) - 1; //string literals have implicit trailing '\0'
+            NSMutableData *ByteHeader = [NSMutableData dataWithBytes:bytes length:length];
+            
+            
+            
+            NSData *ddata3 = [NSData dataWithBytes: d length:NALUnitLength];
+            
+            
+            [ByteHeader appendData:ddata3];
+            
+              [encoder.fileHandle writeData:ByteHeader];
+        
+            
+            //NSLog(@"===%s",d);
+            
+            //NSData* data = [[NSData alloc] initWithBytes:(dataPointer + bufferOffset + AVCCHeaderLength) length:NALUnitLength];
+            //[encoder gotEncodedData:data isKeyFrame:isKeyframe];
+            [[RtmpManager getInstance] send_rtmp_video:(char *)[ByteHeader bytes] andLength:NALUnitLength + length];
             
             // 移动到写一个块，转成NALU单元
             // Move to the next NAL unit in the block buffer
@@ -169,11 +207,14 @@ void didCompressH264(void *outputCallbackRefCon, void *sourceFrameRefCon, OSStat
     // [self.fileHandle writeData:sps];
     // [self.fileHandle writeData:ByteHeader];
     // [self.fileHandle writeData:pps];
-    
-    //如何你想测试h264 请按注释的代码
+     //如何你想测试h264 请按注释的代码
     if ([self.delegate respondsToSelector:@selector(h264Encoder:didGetSps:pps:timestamp:)]) {
         [self.delegate h264Encoder:self didGetSps:sps pps:pps timestamp:0];
     }
+    
+   // [[RtmpManager getInstance] send_video_sps_pps:(unsigned char *)[sps bytes] andSpsLength:(uint32_t)[sps length] andPPs:(unsigned char *)[pps bytes] andPPsLength:(uint32_t)[pps length]];
+    
+      // NSLog(@"2222");
     
 }
 
@@ -189,6 +230,11 @@ void didCompressH264(void *outputCallbackRefCon, void *sourceFrameRefCon, OSStat
     //  [self.fileHandle writeData:ByteHeader];
     // [self.fileHandle writeData:data];
     //}
+    //NSLog(@"1111");
+    //[[RtmpManager getInstance] send_rtmp_video:(unsigned char *)[data bytes] andLength:(uint32_t)[data length]];
+    
+    
+    //NSLog(@"==%s",(unsigned char *)[data bytes]);
     
     if ([self.delegate respondsToSelector:@selector(h264Encoder:didEncodeFrame:timestamp:isKeyFrame:)]) {
         [self.delegate h264Encoder:self didEncodeFrame:data timestamp:0 isKeyFrame:YES];
@@ -200,5 +246,17 @@ void didCompressH264(void *outputCallbackRefCon, void *sourceFrameRefCon, OSStat
     VTCompressionSessionInvalidate(self.compressionSession);
     CFRelease(self.compressionSession);
     self.compressionSession = NULL;
+}
+
+- (void)setupFileHandle {
+    // 1.获取沙盒路径
+    NSString *file = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"9527.h264"];
+    
+    // 2.如果原来有文件,则删除
+    [[NSFileManager defaultManager] removeItemAtPath:file error:nil];
+    [[NSFileManager defaultManager] createFileAtPath:file contents:nil attributes:nil];
+    
+    // 3.创建对象
+    self.fileHandle = [NSFileHandle fileHandleForWritingAtPath:file];
 }
 @end
