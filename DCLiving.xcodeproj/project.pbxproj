@@ -17,6 +17,11 @@
 		590D8C451FEA012C007499FD /* DCLiveSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 590D8C441FEA012C007499FD /* DCLiveSession.m */; };
 		591111371FEB7F650067D3AE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 591111361FEB7F5B0067D3AE /* libz.tbd */; };
 		5911113A1FEB868A0067D3AE /* RtmpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 591111391FEB868A0067D3AE /* RtmpManager.m */; };
+		5930C1BB1FEE241800147269 /* RtmpSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5930C1BA1FEE241800147269 /* RtmpSession.m */; };
+		5930C1BE1FEE246400147269 /* RtmpConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5930C1BD1FEE246400147269 /* RtmpConfig.m */; };
+		5930C1C11FEE249D00147269 /* AudioConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5930C1C01FEE249D00147269 /* AudioConfig.m */; };
+		5930C1C71FEE24DE00147269 /* VideoFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5930C1C61FEE24DE00147269 /* VideoFrame.m */; };
+		5930C1CA1FEE24F100147269 /* AudioFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 5930C1C91FEE24F100147269 /* AudioFrame.m */; };
 		596F2EAC1FEB6E1C00283916 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596F2E571FEB6E1C00283916 /* libcrypto.a */; };
 		596F2EAD1FEB6E1C00283916 /* librtmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596F2E581FEB6E1C00283916 /* librtmp.a */; };
 		596F2EAE1FEB6E1C00283916 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596F2E591FEB6E1C00283916 /* libssl.a */; };
@@ -43,6 +48,16 @@
 		591111361FEB7F5B0067D3AE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		591111381FEB868A0067D3AE /* RtmpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RtmpManager.h; sourceTree = "<group>"; };
 		591111391FEB868A0067D3AE /* RtmpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RtmpManager.m; sourceTree = "<group>"; };
+		5930C1B91FEE241800147269 /* RtmpSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RtmpSession.h; sourceTree = "<group>"; };
+		5930C1BA1FEE241800147269 /* RtmpSession.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RtmpSession.m; sourceTree = "<group>"; };
+		5930C1BC1FEE246400147269 /* RtmpConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RtmpConfig.h; sourceTree = "<group>"; };
+		5930C1BD1FEE246400147269 /* RtmpConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RtmpConfig.m; sourceTree = "<group>"; };
+		5930C1BF1FEE249D00147269 /* AudioConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioConfig.h; sourceTree = "<group>"; };
+		5930C1C01FEE249D00147269 /* AudioConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioConfig.m; sourceTree = "<group>"; };
+		5930C1C51FEE24DE00147269 /* VideoFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoFrame.h; sourceTree = "<group>"; };
+		5930C1C61FEE24DE00147269 /* VideoFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoFrame.m; sourceTree = "<group>"; };
+		5930C1C81FEE24F100147269 /* AudioFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioFrame.h; sourceTree = "<group>"; };
+		5930C1C91FEE24F100147269 /* AudioFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioFrame.m; sourceTree = "<group>"; };
 		596F2E571FEB6E1C00283916 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		596F2E581FEB6E1C00283916 /* librtmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librtmp.a; sourceTree = "<group>"; };
 		596F2E591FEB6E1C00283916 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
@@ -194,6 +209,8 @@
 		590D8C3D1FE9FC9C007499FD /* Rtmp */ = {
 			isa = PBXGroup;
 			children = (
+				5930C1B91FEE241800147269 /* RtmpSession.h */,
+				5930C1BA1FEE241800147269 /* RtmpSession.m */,
 				591111381FEB868A0067D3AE /* RtmpManager.h */,
 				591111391FEB868A0067D3AE /* RtmpManager.m */,
 				596F2E5A1FEB6E1C00283916 /* include */,
@@ -218,6 +235,7 @@
 			children = (
 				590D8C431FEA012C007499FD /* DCLiveSession.h */,
 				590D8C441FEA012C007499FD /* DCLiveSession.m */,
+				5930C1B51FEE1E9100147269 /* Frame */,
 				590D8C461FEA0154007499FD /* Config */,
 				590D8C3E1FE9FCD6007499FD /* Encoder */,
 				590D8C3D1FE9FC9C007499FD /* Rtmp */,
@@ -231,6 +249,10 @@
 			children = (
 				5976CC1E1FEA1058006C2AF6 /* VideoConfig.h */,
 				5976CC1F1FEA1058006C2AF6 /* VideoConfig.m */,
+				5930C1BC1FEE246400147269 /* RtmpConfig.h */,
+				5930C1BD1FEE246400147269 /* RtmpConfig.m */,
+				5930C1BF1FEE249D00147269 /* AudioConfig.h */,
+				5930C1C01FEE249D00147269 /* AudioConfig.m */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -241,6 +263,17 @@
 				591111361FEB7F5B0067D3AE /* libz.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5930C1B51FEE1E9100147269 /* Frame */ = {
+			isa = PBXGroup;
+			children = (
+				5930C1C51FEE24DE00147269 /* VideoFrame.h */,
+				5930C1C61FEE24DE00147269 /* VideoFrame.m */,
+				5930C1C81FEE24F100147269 /* AudioFrame.h */,
+				5930C1C91FEE24F100147269 /* AudioFrame.m */,
+			);
+			path = Frame;
 			sourceTree = "<group>";
 		};
 		596F2E561FEB6E1C00283916 /* lib */ = {
@@ -426,14 +459,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5930C1BE1FEE246400147269 /* RtmpConfig.m in Sources */,
 				5976CC1D1FEA0D7A006C2AF6 /* H264Encoder.m in Sources */,
 				590D8C451FEA012C007499FD /* DCLiveSession.m in Sources */,
 				590D8C421FE9FE09007499FD /* VideoCapture.m in Sources */,
+				5930C1C71FEE24DE00147269 /* VideoFrame.m in Sources */,
 				590D8C2B1FE9FC5E007499FD /* ViewController.m in Sources */,
+				5930C1CA1FEE24F100147269 /* AudioFrame.m in Sources */,
 				590D8C361FE9FC5E007499FD /* main.m in Sources */,
 				5911113A1FEB868A0067D3AE /* RtmpManager.m in Sources */,
 				5976CC201FEA1058006C2AF6 /* VideoConfig.m in Sources */,
 				5976CC1A1FEA0D5E006C2AF6 /* AACEncoder.m in Sources */,
+				5930C1C11FEE249D00147269 /* AudioConfig.m in Sources */,
+				5930C1BB1FEE241800147269 /* RtmpSession.m in Sources */,
 				590D8C281FE9FC5E007499FD /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
